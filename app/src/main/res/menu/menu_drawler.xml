@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:id="@+id/menunew"
+              android:title="Tin mới"
+            android:icon="@drawable/news"
+            ></item>
+        <item android:id="@+id/menusocial"
+            android:title="Xã hội"
+            android:icon="@drawable/social"
+            ></item>
+        <item android:id="@+id/menuearth"
+            android:title="Thế giới"
+            android:icon="@drawable/earth"
+            ></item>
+        <item android:id="@+id/menueconomic"
+            android:title="Kinh tế"
+            android:icon="@drawable/economic"
+            ></item>
+        <item android:id="@+id/menuscience"
+            android:title="Khoa học"
+            android:icon="@drawable/khoahoc"
+            ></item>
+        <item android:id="@+id/menucultural"
+            android:title="Văn hóa"
+            android:icon="@drawable/cultural"></item>
+        <item android:id="@+id/menusport"
+            android:title="Thể thao"
+            android:icon="@drawable/sport"
+            ></item>
+        <item android:id="@+id/menuentertainment"
+            android:title="Giải trí"
+            android:icon="@drawable/film"
+            ></item>
+        <item android:id="@+id/menurole"
+            android:title="Pháp luật"
+            android:icon="@drawable/phapuat"
+            ></item>
+        <item android:id="@+id/menueducatiom"
+            android:title="Giáo dục"
+            android:icon="@drawable/education"
+            ></item>
+        <item android:id="@+id/menuhealthy"
+            android:title="Sức khỏe"
+            android:icon="@drawable/healthy"
+            ></item>
+        <item android:id="@+id/menuhouse"
+            android:title="Nhà đất"
+            android:icon="@drawable/house"
+            ></item>
+        <item android:id="@+id/menucar"
+            android:title="Ô tô - Xe máy"
+            android:icon="@drawable/car"
+            ></item>
+    </group>
+</menu>

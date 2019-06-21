@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+     <item android:icon="@drawable/seen"
+         android:title="Tin đã đọc"
+         android:id="@+id/menuseen"
+         ></item>
+    <item android:icon="@drawable/heart"
+        android:title="Tin đã lưu"
+        android:id="@+id/menuheart"
+        ></item>
+    <item android:icon="@drawable/infor"
+        android:title="Thông tin ứng dụng"
+        android:id="@+id/menuinfor"
+        ></item>
+    <item android:icon="@drawable/refresh"
+        android:title="Thông tin ứng dụng"
+        android:id="@+id/menurefresh"
+        app:showAsAction="always"
+        ></item>
+</menu>
