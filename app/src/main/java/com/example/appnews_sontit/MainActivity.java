@@ -1,7 +1,12 @@
 package com.example.appnews_sontit;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -74,11 +79,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menuinfor:
                 Toast.makeText(this, "Bạn chọn thông tin app", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.menurefresh:
+                Toast.makeText(this, "bạn chọn refresh", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
     // sự kiện click vào item drawler
     private void sukiendrawer(){
+        setBackground(MainActivity.this,navigationView,R.drawable.girl);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -130,5 +138,14 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+    // hàm setbackround cho view
+    public void setBackground(Context context, View view, int drawableId){
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), drawableId);
+        int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+        int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+        bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(context.getResources(), bitmap);
+        view.setBackground(bitmapDrawable);
     }
 }
