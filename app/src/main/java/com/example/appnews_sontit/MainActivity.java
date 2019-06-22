@@ -9,6 +9,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -20,9 +23,25 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.appnews_sontit.fragment.FragmnetContent;
+import com.example.appnews_sontit.unity.Server;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 public class MainActivity extends AppCompatActivity {
+    FragmentManager fragmentManager;
+    LinearLayout layout;
     FrameLayout frameLayout;
     Toolbar toolbar;
     NavigationView navigationView;
@@ -34,9 +53,12 @@ public class MainActivity extends AppCompatActivity {
         anhxa();
         Actionbar();
         sukiendrawer();
+        loadFragment(new FragmnetContent(),"content");
     }
     // ánh xạ
     private void anhxa() {
+        fragmentManager = getSupportFragmentManager();
+        layout =(LinearLayout) findViewById(R.id.activity) ;
         frameLayout = (FrameLayout) findViewById(R.id.framelayout) ;
         toolbar = (Toolbar) findViewById(R.id.toolbarmanhinhchinh);
         navigationView = (NavigationView) findViewById(R.id.navigationviewmanhinhchinh);
@@ -46,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
     private void Actionbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationIcon(R.drawable.menu);
-        toolbar.setTitle("Tin nóng");
+        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
+        toolbar.setTitle("");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Bạn chọn thông tin app", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menurefresh:
-                Toast.makeText(this, "bạn chọn refresh", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Đã refresh !", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -93,46 +115,73 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawers();
                 // Add code here to update the UI based on the item selected
                 // For example, swap UI fragments here
+                Fragment fragment = new Fragment();
                 switch (menuItem.getItemId())
                 {
                     case R.id.menunew:
-                        Toast.makeText(MainActivity.this, "bạn chọn Tin nóng", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/tin-moi.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                     case R.id.menusocial:
-                        Toast.makeText(MainActivity.this, "bạn chọn xã hội", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/xa-hoi.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                     case R.id.menuearth:
-                        Toast.makeText(MainActivity.this, "bạn chọn thế giới", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/the-gioi.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                     case R.id.menueconomic:
-                        Toast.makeText(MainActivity.this, "bạn chọn kinh tế", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/kinh-te.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                     case R.id.menuscience:
-                        Toast.makeText(MainActivity.this, "bạn chọn khoa học", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/khoa-hoc.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                     case R.id.menucultural:
-                        Toast.makeText(MainActivity.this, "bạn chọn văn hóa", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/van-hoa.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                     case R.id.menusport:
-                        Toast.makeText(MainActivity.this, "bạn chọn thể thao", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/the-thao.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                     case R.id.menuentertainment:
-                        Toast.makeText(MainActivity.this, "bạn chọn giải trí", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/giai-tri.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                     case R.id.menurole:
-                        Toast.makeText(MainActivity.this, "bạn chọn pháp luật", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/phap-luat.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                     case R.id.menueducatiom:
-                        Toast.makeText(MainActivity.this, "bạn chọn giáo dục", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/giao-duc.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                     case R.id.menuhealthy:
-                        Toast.makeText(MainActivity.this, "bạn chọn sức khỏe", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/doi-song.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                     case R.id.menuhouse:
-                        Toast.makeText(MainActivity.this, "bạn chọn nhà đất", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/nha-dat.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                     case R.id.menucar:
-                        Toast.makeText(MainActivity.this, "bạn chọn oto xe máy", Toast.LENGTH_SHORT).show();
+                        Server.link= "https://baomoi.com/xe-co.epi";
+                        fragment = new FragmnetContent();
+                        loadFragment(fragment,"content");
                         break;
                 }
                 return true;
@@ -147,5 +196,19 @@ public class MainActivity extends AppCompatActivity {
         bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
         BitmapDrawable bitmapDrawable = new BitmapDrawable(context.getResources(), bitmap);
         view.setBackground(bitmapDrawable);
+    }
+    // hàm load fragmnet
+    public void loadFragment(Fragment fragment,String key){
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.framelayout,fragment,key);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(fragmentManager.getBackStackEntryCount() == 0){
+            finish();
+        }
     }
 }
