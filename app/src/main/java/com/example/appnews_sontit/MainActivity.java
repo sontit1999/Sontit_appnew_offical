@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.menuseen:
-                Toast.makeText(this, "Bạn chọn tin đã xem", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,Seenpost.class));
                 break;
             case R.id.menuheart:
                 Toast.makeText(this, "Bạn chọn tin đã lưu", Toast.LENGTH_SHORT).show();
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     }
     // sự kiện click vào item drawler
     private void sukiendrawer(){
-        setBackground(MainActivity.this,navigationView,R.drawable.girl);
+       // setBackground(MainActivity.this,navigationView,R.drawable.girl);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -119,66 +119,79 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.menunew:
+                        toolbar.setTitle("Tin mới");
                         Server.link= "https://baomoi.com/tin-moi.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
                     case R.id.menusocial:
+                        toolbar.setTitle("Xã hội");
                         Server.link= "https://baomoi.com/xa-hoi.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
                     case R.id.menuearth:
+                        toolbar.setTitle("Thế giới");
                         Server.link= "https://baomoi.com/the-gioi.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
                     case R.id.menueconomic:
+                        toolbar.setTitle("Kinh tế");
                         Server.link= "https://baomoi.com/kinh-te.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
                     case R.id.menuscience:
+                        toolbar.setTitle("Khoa học");
                         Server.link= "https://baomoi.com/khoa-hoc.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
                     case R.id.menucultural:
+                        toolbar.setTitle("Văn hóa");
                         Server.link= "https://baomoi.com/van-hoa.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
                     case R.id.menusport:
+                        toolbar.setTitle("Thể thao");
                         Server.link= "https://baomoi.com/the-thao.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
                     case R.id.menuentertainment:
+                        toolbar.setTitle("Giải trí");
                         Server.link= "https://baomoi.com/giai-tri.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
                     case R.id.menurole:
+                        toolbar.setTitle("Pháp luật");
                         Server.link= "https://baomoi.com/phap-luat.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
                     case R.id.menueducatiom:
+                        toolbar.setTitle("Giáo dục");
                         Server.link= "https://baomoi.com/giao-duc.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
                     case R.id.menuhealthy:
+                        toolbar.setTitle("Sức khỏe");
                         Server.link= "https://baomoi.com/doi-song.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
                     case R.id.menuhouse:
+                        toolbar.setTitle("Nhà đất");
                         Server.link= "https://baomoi.com/nha-dat.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
                     case R.id.menucar:
+                        toolbar.setTitle("Xe cộ");
                         Server.link= "https://baomoi.com/xe-co.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
