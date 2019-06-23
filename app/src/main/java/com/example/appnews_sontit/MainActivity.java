@@ -1,6 +1,7 @@
 package com.example.appnews_sontit;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -98,11 +99,15 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menuheart:
                 Toast.makeText(this, "Bạn chọn tin đã lưu", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.menubright:
+                Toast.makeText(this, "Bạn chọn chế độ ban đêm", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.menuinfor:
-                Toast.makeText(this, "Bạn chọn thông tin app", Toast.LENGTH_SHORT).show();
+                showDialoginfor();
                 break;
             case R.id.menurefresh:
-                Toast.makeText(this, "Đã refresh !", Toast.LENGTH_SHORT).show();
+                FragmnetContent fragmnetContent = (FragmnetContent) getSupportFragmentManager().findFragmentByTag("content");
+                fragmnetContent.refresh();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -120,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     case R.id.menunew:
                         toolbar.setTitle("Tin mới");
-                        Server.link= "https://baomoi.com/tin-moi.epi";
+                        Server.link= "https://baomoi.com/tin-moi/trang1.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
                         break;
@@ -220,8 +225,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(fragmentManager.getBackStackEntryCount() == 0){
             finish();
-        }
+    }
+    // show dialog
+    public void showDialoginfor(){
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_inforapp);
+        dialog.show();
     }
 }
