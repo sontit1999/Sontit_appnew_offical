@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:layout_width="250dp"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:textStyle="bold"
+        android:textColor="#E21E1E"
+        android:textSize="20sp"
+        android:text="Thông tin ứng dụng"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textStyle="italic"
+        android:layout_marginTop="10dp"
+    android:textColor="#000000"
+    android:textSize="20sp"
+    android:text="Đây là ứng dụng đọc tin tức 24h được tổng hợp từ tất cả các trang báo điện tử tại việt nam "
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    <TextView
+        android:textStyle="italic"
+        android:layout_marginTop="20dp"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:text="Phiên bản 6.9.x.x \n Bản quyền thuộc về Sơn Tít."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

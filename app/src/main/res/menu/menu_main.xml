@@ -13,8 +13,11 @@
         android:title="Thông tin ứng dụng"
         android:id="@+id/menuinfor"
         ></item>
-    <item android:icon="@drawable/refresh"
-        android:title="Thông tin ứng dụng"
+    <item android:icon="@drawable/moon2"
+        android:title="Chế độ ban đêm"
+        android:id="@+id/menubright"
+        ></item>
+    <item android:icon="@drawable/ic_refresh_black_24dp"
         android:id="@+id/menurefresh"
         app:showAsAction="always"
         ></item>

@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,Seenpost.class));
                 break;
             case R.id.menuheart:
-                Toast.makeText(this, "Bạn chọn tin đã lưu", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,Savepost.class));
                 break;
             case R.id.menubright:
                 Toast.makeText(this, "Bạn chọn chế độ ban đêm", Toast.LENGTH_SHORT).show();

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/activity"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent">
@@ -15,8 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <android.support.v7.widget.Toolbar
+                android:elevation="4dp"
+                android:background="#FDFAFA"
                 android:id="@+id/toolbarmanhinhchinh"
-                android:background="#00BCD4"
                 app:title="Trang chủ"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
@@ -26,7 +28,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <FrameLayout
-                    android:background="#4CAF50"
                     android:id="@+id/framelayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -36,11 +37,11 @@
         <!-- End Nội dung -->
         <!-- start left Menu -->
         <android.support.design.widget.NavigationView
+            android:background="@mipmap/girlxinh2"
             app:menu="@menu/menu_drawler"
             android:id="@+id/navigationviewmanhinhchinh"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
-            android:background="@drawable/girl"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.design.widget.NavigationView>
