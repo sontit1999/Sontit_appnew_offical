@@ -61,36 +61,5 @@ public class Detailpost extends AppCompatActivity {
             }
         });
     }
-    /*
-    //tạo menu
-    @SuppressLint("RestrictedApi")
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (menu instanceof MenuBuilder) {
-            ((MenuBuilder) menu).setOptionalIconsVisible(true);
-        }
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-    // sự kiện click menu
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
-            case R.id.menuseen:
-                startActivity(new Intent(Detailpost.this,Seenpost.class));
-                break;
-            case R.id.menuheart:
-                Toast.makeText(this, "Bạn chọn tin đã lưu", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.menuinfor:
-                Toast.makeText(this, "Bạn chọn thông tin app", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.menurefresh:
-                Toast.makeText(this, "Đã refresh", Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    */
 
 }

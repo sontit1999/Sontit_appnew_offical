@@ -19,27 +19,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AnimationUtils;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.appnews_sontit.fragment.FragmnetContent;
+import com.example.appnews_sontit.unity.Config;
 import com.example.appnews_sontit.unity.Server;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
@@ -52,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Display display = ((WindowManager)getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
+        Config.orien = display.getOrientation();
         anhxa();
         Actionbar();
         sukiendrawer();
@@ -219,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
     // hàm load fragmnet
     public void loadFragment(Fragment fragment,String key){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack(key);
         fragmentTransaction.replace(R.id.framelayout,fragment,key);
         fragmentTransaction.commit();
     }
@@ -234,4 +228,5 @@ public class MainActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.dialog_inforapp);
         dialog.show();
     }
+
 }

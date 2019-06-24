@@ -1,7 +1,5 @@
 package com.example.appnews_sontit.fragment;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -10,9 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -20,10 +16,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -31,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.appnews_sontit.unity.Config;
 import com.example.appnews_sontit.R;
 import com.example.appnews_sontit.adapter.PostAdapter;
 import com.example.appnews_sontit.unity.Post;
@@ -55,6 +48,7 @@ public class FragmnetContent extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_content,container,false);
+        Log.d("vongdoi","oncreatview - Fragment");
         // ánh xạ
         anhxa(view);
         setuprecyclerview();
@@ -92,7 +86,11 @@ public class FragmnetContent extends Fragment {
         recyclerView.addItemDecoration(itemDecorator);
 
         adapter = new PostAdapter(getActivity(),R.layout.item_post,1,arrayListPost);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        if(Config.orien == 0){
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        }else{
+             recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,1));
+        }
         recyclerView.setAdapter(adapter);
 
     }
@@ -171,12 +169,5 @@ public class FragmnetContent extends Fragment {
         mediaPlayer.start();
         swl.setRefreshing(false);
         Toast.makeText(getActivity(), "Đã cập nhật ! ahihi ^^", Toast.LENGTH_SHORT).show();
-    }
-    // hàm thay thế kí tự có vị trí index = 1 chuỗi
-    public String replaceChar(String str, String newstring, int index) {
-        return str.substring(0, index) + newstring + str.substring(index+1);
-    }
-    public void Toast(){
-        Toast.makeText(getContext(), "Sơn tít", Toast.LENGTH_SHORT).show();
     }
 }
