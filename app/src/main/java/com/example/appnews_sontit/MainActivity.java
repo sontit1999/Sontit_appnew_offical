@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,12 +32,17 @@ import android.widget.Toast;
 
 import com.example.appnews_sontit.fragment.FragmnetContent;
 import com.example.appnews_sontit.unity.Config;
+import com.example.appnews_sontit.unity.Database;
+import com.example.appnews_sontit.unity.Post;
 import com.example.appnews_sontit.unity.Server;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
+    static Database database;
     FragmentManager fragmentManager;
     LinearLayout layout;
-    FrameLayout frameLayout;
+    public static FrameLayout frameLayout;
     Toolbar toolbar;
     NavigationView navigationView;
     DrawerLayout drawerLayout;
@@ -43,15 +50,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Display display = ((WindowManager)getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
-        Config.orien = display.getOrientation();
+        getorientionscreen();
         anhxa();
         Actionbar();
+        setupdatabse();
         sukiendrawer();
         loadFragment(new FragmnetContent(),"content");
+        removePost("https://baomoi.com/bac-si-chiem-quoc-thai-ban-an-cho-ngoc-thoa-dang-nhung-toi-khang-cao/r/31235056.epi","Savepost");
     }
     // ánh xạ
     private void anhxa() {
+        database = new Database(this,"tintuc",null,1);
         fragmentManager = getSupportFragmentManager();
         layout =(LinearLayout) findViewById(R.id.activity) ;
         frameLayout = (FrameLayout) findViewById(R.id.framelayout) ;
@@ -94,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,Savepost.class));
                 break;
             case R.id.menubright:
-                Toast.makeText(this, "Bạn chọn chế độ ban đêm", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Chế độ ban đêm chưa phát triển hi ^^", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menuinfor:
                 showDialoginfor();
@@ -228,5 +237,29 @@ public class MainActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.dialog_inforapp);
         dialog.show();
     }
-
+    // get hướng màn hình
+    public void getorientionscreen(){
+        Display display = ((WindowManager)getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
+        Config.orien = display.getOrientation();
+    }
+    /// thêm 1 tin vào bảng tinđaxem
+    public static void addPostseen(Post post,String table){
+       // Post post1 = new Post("https://photo-1-baomoi.zadn.vn/w700_r16x9_sm/2019_06_25_119_31223259/7e4041533d13d44d8d02.jpg","https://baomoi.com/","sontit dz ","dantri","06-10-1999");
+        database.QueryData("INSERT INTO " + table + "  VALUES('" + post.getLinkthumbail()+ "','" + post.getLinkpost() + "','" + post.getTittle().replace("'","") + "','" + post.getFromnew() + "','" + post.getTimepost() + "')");
+       // Log.d("query",("INSERT INTO tindaxem  VALUES(null,'" + post1.getLinkthumbail()+ "','" + post1.getLinkpost() + "','" + post1.getTittle().replace(",","") + "','" + post1.getFromnew() + "','" + post1.getTimepost() + "')").replace("'",""));
+    }
+    /// setupdatabase+
+    public void setupdatabse(){
+        database = new Database(this,"tintuc",null,1);
+        database.QueryData("CREATE TABLE IF NOT EXISTS Seenpost(linkanh varchar(200), linkpost varchar(200), title varchar(200), fromnew varchar(200), time varchar(200))");
+        database.QueryData("CREATE TABLE IF NOT EXISTS Savepost(linkanh varchar(200), linkpost varchar(200), title varchar(200), fromnew varchar(200), time varchar(200))");
+    }
+    // xóa all recorde in table
+    public static void removeallPost(String table){
+        database.QueryData("DELETE FROM "+table);
+    }
+    // hàm remove 1 post trong table
+    public static void removePost(String linkpost,String table){
+        database.QueryData("DELETE FROM " + table + " WHERE linkpost = '" + linkpost + "'");
+    }
 }

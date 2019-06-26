@@ -17,9 +17,12 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appnews_sontit.Detailpost;
+import com.example.appnews_sontit.MainActivity;
 import com.example.appnews_sontit.R;
+import com.example.appnews_sontit.unity.Database;
 import com.example.appnews_sontit.unity.Post;
 import com.squareup.picasso.Picasso;
 
@@ -68,12 +71,25 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.Myviewholder> 
         Picasso.get().load(post.getLinkthumbail()).into(myviewholder.img);
         myviewholder.txttittle.setText(post.getTittle());
         myviewholder.txttimeandfrom.setText(post.getFromnew() + " - " + post.getTimepost());
+        // bắt sự kiện click vào item thì add post vào database
         myviewholder.containerpost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                post.setTimepost("");
+                MainActivity.addPostseen(post,"Seenpost");
                 Intent intent = new Intent(context, Detailpost.class);
                 intent.putExtra("link",post.getLinkpost());
                 context.startActivity(intent);
+            }
+        });
+        // bắt sự kiện longclick vào item thì save post vào database
+        myviewholder.containerpost.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(context, "Đã lưu tin", Toast.LENGTH_SHORT).show();
+                post.setTimepost("");
+                MainActivity.addPostseen(post,"Savepost");
+                return true;
             }
         });
 
@@ -89,17 +105,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.Myviewholder> 
         LinearLayout containerpost;
         ImageView img;
         TextView txttittle,txttimeandfrom;
-        public Myviewholder(@NonNull View itemView) {
+        public Myviewholder(@NonNull final View itemView) {
             super(itemView);
             img = (ImageView) itemView.findViewById(R.id.imageviewcontent);
             txttittle = (TextView) itemView.findViewById(R.id.textviewtittlecontent);
             txttimeandfrom  = (TextView) itemView.findViewById(R.id.textviewtimeandfrom);
             containerpost = (LinearLayout) itemView.findViewById(R.id.containerpost);
         }
-    }
-    public ObjectAnimator animate(Myviewholder viewHolder){
-        ObjectAnimator animatortranslateY = ObjectAnimator.ofFloat(viewHolder.containerpost,"translationY",0,1);
-        animatortranslateY.setDuration(1000);
-        return  animatortranslateY;
     }
 }

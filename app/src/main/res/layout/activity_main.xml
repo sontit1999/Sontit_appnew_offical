@@ -17,13 +17,13 @@
             android:layout_height="match_parent">
             <android.support.v7.widget.Toolbar
                 android:elevation="4dp"
-                android:background="#FDFAFA"
+                android:background="@color/_while"
                 android:id="@+id/toolbarmanhinhchinh"
                 app:title="Trang chủ"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
             <LinearLayout
-                android:background="#ECEAEA"
+                android:background="@color/_while"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

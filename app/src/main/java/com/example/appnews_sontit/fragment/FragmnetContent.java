@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.appnews_sontit.unity.Config;
 import com.example.appnews_sontit.R;
 import com.example.appnews_sontit.adapter.PostAdapter;
+import com.example.appnews_sontit.unity.Database;
 import com.example.appnews_sontit.unity.Post;
 import com.example.appnews_sontit.unity.Server;
 
@@ -34,6 +36,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -65,9 +68,11 @@ public class FragmnetContent extends Fragment {
                 }
             }
         });
+
         return view;
     }
     public void anhxa(View view){
+
         swl = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshlayout);
         // random màu swipe to refresh
         Random rnd = new Random();
@@ -170,4 +175,5 @@ public class FragmnetContent extends Fragment {
         swl.setRefreshing(false);
         Toast.makeText(getActivity(), "Đã cập nhật ! ahihi ^^", Toast.LENGTH_SHORT).show();
     }
+
 }

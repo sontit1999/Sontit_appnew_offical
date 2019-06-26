@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     android:id="@+id/containerpost"
-    android:background="#fff"
+    android:background="@color/_while"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <android.support.v7.widget.CardView android:layout_width="match_parent"
         app:cardUseCompatPadding="true"
@@ -13,7 +13,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android">
         <RelativeLayout
-            android:background="#fff"
+            android:background="@color/_while"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             xmlns:android="http://schemas.android.com/apk/res/android">
@@ -24,11 +24,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp" />
             <TextView
+
                 android:padding="10dp"
                 android:layout_marginTop="5dp"
                 android:id="@+id/textviewtittlecontent"
                 android:textStyle="bold"
-                android:textColor="#555151"
+                android:textColor="@color/black"
                 android:layout_below="@id/imageviewcontent"
                 android:textSize="20sp"
                 android:text="Tiêu đề"
