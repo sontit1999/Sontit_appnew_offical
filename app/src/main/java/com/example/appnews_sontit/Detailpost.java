@@ -2,6 +2,7 @@ package com.example.appnews_sontit;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,10 @@ import android.widget.Toast;
 
 import com.example.appnews_sontit.adapter.PostAdapter;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 public class Detailpost extends AppCompatActivity {
     Toolbar toolbar;
     WebView webView;
@@ -32,7 +37,6 @@ public class Detailpost extends AppCompatActivity {
         Intent intent = getIntent();
         link = intent.getStringExtra("link");
         setupwwebview();
-
     }
     private void anhxa()
     {
@@ -42,11 +46,20 @@ public class Detailpost extends AppCompatActivity {
     // setup webview
     private  void setupwwebview()
     {
+
         webView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = webView.getSettings();
-        webSettings.setBuiltInZoomControls(true);
-        webSettings.setDisplayZoomControls(false);
+        webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webSettings.setAppCacheEnabled(true);
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setBuiltInZoomControls(false);
+        webSettings.setDisplayZoomControls(true);
+        webSettings.setSaveFormData(true);
         webSettings.setJavaScriptEnabled(true);
+
         webView.loadUrl(link);
     }
     // set up toolbar
@@ -61,5 +74,4 @@ public class Detailpost extends AppCompatActivity {
             }
         });
     }
-
 }

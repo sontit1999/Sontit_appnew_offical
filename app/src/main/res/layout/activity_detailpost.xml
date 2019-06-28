@@ -12,9 +12,9 @@
         app:title="Chi tiết"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
-    <WebView
-        android:layout_below="@id/toolbardetailpost"
-        android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
+     <WebView
+         android:layout_below="@+id/toolbardetailpost"
+         android:id="@+id/webview"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"></WebView>
 </RelativeLayout>
