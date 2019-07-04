@@ -12,9 +12,20 @@
         app:title="Chi tiết"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
-     <WebView
-         android:layout_below="@+id/toolbardetailpost"
-         android:id="@+id/webview"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"></WebView>
+    <FrameLayout
+        android:layout_below="@id/toolbardetailpost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <WebView
+            android:layout_below="@+id/toolbardetailpost"
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></WebView>
+        <ProgressBar
+            android:id="@+id/progressdetail"
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+    </FrameLayout>
+
 </RelativeLayout>

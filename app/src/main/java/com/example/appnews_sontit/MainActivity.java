@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         setupdatabse();
         sukiendrawer();
         loadFragment(new FragmnetContent(),"content");
-        removePost("https://baomoi.com/bac-si-chiem-quoc-thai-ban-an-cho-ngoc-thoa-dang-nhung-toi-khang-cao/r/31235056.epi","Savepost");
     }
     // ánh xạ
     private void anhxa() {

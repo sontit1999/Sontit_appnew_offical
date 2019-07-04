@@ -9,10 +9,20 @@
         android:id="@+id/swiperefreshlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerviewcontent"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerviewcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            <ProgressBar
+                android:layout_gravity="center"
+                android:id="@+id/progress"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+        </FrameLayout>
+
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

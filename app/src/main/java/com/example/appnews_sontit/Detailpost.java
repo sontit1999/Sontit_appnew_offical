@@ -16,30 +16,50 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.appnews_sontit.adapter.PostAdapter;
+import com.example.appnews_sontit.unity.Post;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Detailpost extends AppCompatActivity {
     Toolbar toolbar;
     WebView webView;
     String link;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailpost);
         anhxa();
-        Actionbar();
         Intent intent = getIntent();
         link = intent.getStringExtra("link");
-        setupwwebview();
+        webView.post(new Runnable() {
+            @Override
+            public void run() {
+                setupwwebview();
+            }
+        });
+        Actionbar();
+        //setupwwebview();
     }
     private void anhxa()
     {
+        progressBar = findViewById(R.id.progressdetail);
         webView = (WebView) findViewById(R.id.webview);
         toolbar = (Toolbar) findViewById(R.id.toolbardetailpost);
     }
@@ -59,8 +79,13 @@ public class Detailpost extends AppCompatActivity {
         webSettings.setDisplayZoomControls(true);
         webSettings.setSaveFormData(true);
         webSettings.setJavaScriptEnabled(true);
-
         webView.loadUrl(link);
+        webView.setWebViewClient(new WebViewClient() {
+
+            public void onPageFinished(WebView view, String url) {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        });
     }
     // set up toolbar
     private void Actionbar() {
@@ -70,8 +95,15 @@ public class Detailpost extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if(webView.canGoBack()){
+                    webView.goBack();
+                }else {
+                    finish();
+                }
+
             }
         });
     }
+
+
 }

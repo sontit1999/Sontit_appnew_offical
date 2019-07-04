@@ -1,7 +1,9 @@
 package com.example.appnews_sontit.fragment;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.appnews_sontit.MainActivity;
 import com.example.appnews_sontit.unity.Config;
 import com.example.appnews_sontit.R;
 import com.example.appnews_sontit.adapter.PostAdapter;
@@ -45,6 +48,7 @@ import java.util.Calendar;
 import java.util.Random;
 
 public class FragmnetContent extends Fragment {
+    ProgressBar progressBar;
     SwipeRefreshLayout swl;
     RecyclerView recyclerView;
     PostAdapter adapter;
@@ -57,10 +61,8 @@ public class FragmnetContent extends Fragment {
         // ánh xạ
         anhxa(view);
         setuprecyclerview();
-        mess();
+        new loadtin().execute(Server.link);
         sukienswipe();
-
-
         // sự kiện khi ko vuốt dc nữa
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -76,7 +78,7 @@ public class FragmnetContent extends Fragment {
         return view;
     }
     public void anhxa(View view){
-
+        progressBar = view.findViewById(R.id.progress);
         swl = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshlayout);
         // random màu swipe to refresh
         Random rnd = new Random();
@@ -180,5 +182,76 @@ public class FragmnetContent extends Fragment {
         swl.setRefreshing(false);
         Toast.makeText(getActivity(), "Đã cập nhật ! ahihi ^^", Toast.LENGTH_SHORT).show();
     }
+    public class loadtin extends AsyncTask<String,Integer,Void>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.d("process","1");
+        }
 
+        @Override
+        protected Void doInBackground(String... strings) {
+            Log.d("process","2");
+            arrayListPost.clear();
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            StringRequest stringRequest = new StringRequest(Request.Method.GET,strings[0], new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d("html",response.toString());
+                    Document document = Jsoup.parse(response);
+                    Elements items = document.select(".story");
+                    String linkthumbail,tittle,timeago,from,linkpost,timeStamp;
+                    String[] arr,arrtimenow;
+                    int hourpost,hournow,minutepost,minutenow;
+                    for(Element i:items)
+                    {
+                        linkthumbail = i.select(".story__thumb a img").attr("src");
+                        tittle = i.select(".story__heading a").text();
+                        timeago = i.select(".story__meta .time").attr("datetime");
+                        from = i.select(".story__meta .source").text();
+                        linkpost = "https://baomoi.com" + i.select(".story__heading a").attr("href");
+                        if(!(linkthumbail.length() == 0 || tittle.length() == 0 || timeago.length() == 0 || linkpost.length() ==0))
+                        {
+                            String[] time = timeago.split("T");
+                            String daypost = time[0].replace('-', '/');
+                            String timepost = time[1].substring(0,5);
+                            String[] mangtime = timepost.split(":");
+                            hourpost = Integer.parseInt(mangtime[0]);
+                            minutepost = Integer.parseInt(mangtime[1]);
+                            timeStamp = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
+                            arrtimenow = timeStamp.split(":");
+                            hournow = Integer.parseInt(arrtimenow[0]);
+                            minutenow = Integer.parseInt(arrtimenow[1]);
+                            if(hournow > hourpost) {
+                                timeago = (hournow - hourpost) + " giờ trước";
+                            }else{
+                                timeago = (minutenow - minutepost) + " phút trước";
+                            }
+                            Log.d("time",hournow + ":" + minutenow);
+                            arrayListPost.add(new Post(linkthumbail,linkpost,tittle,from,timeago));
+                            progressBar.setVisibility(View.INVISIBLE);
+                        }
+
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
+            requestQueue.add(stringRequest);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Log.d("process","3");
+        }
+    }
 }
