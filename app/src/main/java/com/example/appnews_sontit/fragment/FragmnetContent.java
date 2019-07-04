@@ -17,8 +17,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -57,6 +59,8 @@ public class FragmnetContent extends Fragment {
         setuprecyclerview();
         mess();
         sukienswipe();
+
+
         // sự kiện khi ko vuốt dc nữa
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -104,9 +108,10 @@ public class FragmnetContent extends Fragment {
     {
         arrayListPost.clear();
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(Server.link, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,Server.link, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.d("html",response.toString());
                 Document document = Jsoup.parse(response);
                 Elements items = document.select(".story");
                 String linkthumbail,tittle,timeago,from,linkpost,timeStamp;

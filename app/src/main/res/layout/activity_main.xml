@@ -17,7 +17,7 @@
             android:layout_height="match_parent">
             <android.support.v7.widget.Toolbar
                 android:elevation="4dp"
-                android:background="@color/_while"
+                android:background="@color/colorPrimary"
                 android:id="@+id/toolbarmanhinhchinh"
                 app:title="Trang chủ"
                 android:layout_width="match_parent"
@@ -37,7 +37,7 @@
         <!-- End Nội dung -->
         <!-- start left Menu -->
         <android.support.design.widget.NavigationView
-            android:background="@mipmap/girlxinh2"
+            android:background="@mipmap/girlvt"
             app:menu="@menu/menu_drawler"
             android:id="@+id/navigationviewmanhinhchinh"
             android:layout_gravity="start"

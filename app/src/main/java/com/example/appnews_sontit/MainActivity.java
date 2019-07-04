@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,12 +19,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -35,8 +35,6 @@ import com.example.appnews_sontit.unity.Config;
 import com.example.appnews_sontit.unity.Database;
 import com.example.appnews_sontit.unity.Post;
 import com.example.appnews_sontit.unity.Server;
-
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     static Database database;
@@ -203,6 +201,29 @@ public class MainActivity extends AppCompatActivity {
                         Server.link= "https://baomoi.com/xe-co.epi";
                         fragment = new FragmnetContent();
                         loadFragment(fragment,"content");
+                        break;
+                    case R.id.menugirl:
+                        final Dialog dialog = new Dialog(MainActivity.this);
+                        dialog.setContentView(R.layout.dialog_login);
+                        dialog.show();
+                        Button btnlogin = dialog.findViewById(R.id.buttonlogin);
+                        final EditText edtacc = dialog.findViewById(R.id.edittextacc);
+                        final EditText edtpass = dialog.findViewById(R.id.edittextpass);
+                        btnlogin.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(edtacc.getText().toString().equals("son") && edtpass.getText().toString().equals("123")){
+                                    Intent intent = new Intent(MainActivity.this, Detailpost.class);
+                                    intent.putExtra("link","https://checkerviet.com/");
+                                    startActivity(intent);
+                                    dialog.dismiss();
+                                }else{
+                                    Toast.makeText(MainActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                }
+                            }
+                        });
+
                         break;
                 }
                 return true;

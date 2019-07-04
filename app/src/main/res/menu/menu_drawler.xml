@@ -52,5 +52,9 @@
             android:title="Ô tô - Xe máy"
             android:icon="@drawable/car"
             ></item>
+        <item android:id="@+id/menugirl"
+            android:title="Gái 18+"
+            android:icon="@drawable/ic_warning_black_24dp"
+            ></item>
     </group>
 </menu>
