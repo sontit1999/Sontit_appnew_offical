@@ -37,7 +37,7 @@
         <!-- End Nội dung -->
         <!-- start left Menu -->
         <android.support.design.widget.NavigationView
-            android:background="@mipmap/girlvt"
+            android:background="@mipmap/dj"
             app:menu="@menu/menu_drawler"
             android:id="@+id/navigationviewmanhinhchinh"
             android:layout_gravity="start"
