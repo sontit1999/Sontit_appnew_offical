@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.appnews_sontit.adapter.PostAdapter;
+import com.example.appnews_sontit.fragment.FragmnetContent;
 import com.example.appnews_sontit.unity.Post;
 
 import org.jsoup.Jsoup;
@@ -104,6 +105,27 @@ public class Detailpost extends AppCompatActivity {
             }
         });
     }
-
-
+    // tạo menu
+    @SuppressLint("RestrictedApi")
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (menu instanceof MenuBuilder) {
+            ((MenuBuilder) menu).setOptionalIconsVisible(true);
+        }
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
+        return true;
+    }
+    // sự kiện click menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_goto:
+                if(webView.canGoForward()){
+                    webView.goForward();
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
