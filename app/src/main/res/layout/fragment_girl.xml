@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:weightSum="10"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.RecyclerView
+        android:layout_weight="9"
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+    </android.support.v7.widget.RecyclerView>
+    <RelativeLayout
+        android:background="#FDD835"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <TextView
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:id="@+id/textviewtrang"
+            android:textSize="20sp"
+            android:textColor="#00897B"
+            android:text="Trang: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/textviewtrang"
+            android:src="@drawable/ic_first_page_black_24dp"
+            android:id="@+id/imageback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_centerVertical="true"
+            android:id="@+id/textviewpage"
+            android:paddingHorizontal="15dp"
+            android:textSize="20sp"
+            android:text="1"
+            android:layout_toRightOf="@id/imageback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/textviewpage"
+            android:src="@drawable/ic_last_page_black_24dp"
+            android:id="@+id/imagenext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:id="@+id/textviewgo"
+            android:textSize="20sp"
+            android:textColor="#E53935"
+            android:text="=>>>>Let's Go  "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</LinearLayout>

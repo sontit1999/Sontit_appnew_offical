@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,6 +34,7 @@ import com.example.appnews_sontit.unity.Config;
 import com.example.appnews_sontit.R;
 import com.example.appnews_sontit.adapter.PostAdapter;
 import com.example.appnews_sontit.unity.Database;
+import com.example.appnews_sontit.unity.EndlessRecyclerViewScrollListener;
 import com.example.appnews_sontit.unity.Post;
 import com.example.appnews_sontit.unity.Server;
 
@@ -61,7 +63,7 @@ public class FragmnetContent extends Fragment {
         // ánh xạ
         anhxa(view);
         setuprecyclerview();
-        new loadtin().execute(Server.link);
+        mess();
         sukienswipe();
         // sự kiện khi ko vuốt dc nữa
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -89,6 +91,7 @@ public class FragmnetContent extends Fragment {
     }
     // setup recyclerview
     public void setuprecyclerview(){
+
         recyclerView.setHasFixedSize(true);
 
         // add divider item
@@ -97,22 +100,33 @@ public class FragmnetContent extends Fragment {
         recyclerView.addItemDecoration(itemDecorator);
 
         adapter = new PostAdapter(getActivity(),R.layout.item_post,1,arrayListPost);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         if(Config.orien == 0){
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+            recyclerView.setLayoutManager(linearLayoutManager);
         }else{
              recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,1));
         }
         recyclerView.setAdapter(adapter);
 
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "á á", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
     // lấy data
     public void mess()
     {
+
         arrayListPost.clear();
+        adapter.notifyDataSetChanged();
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest = new StringRequest(Request.Method.GET,Server.link, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.d("go","yess");
                 Log.d("html",response.toString());
                 Document document = Jsoup.parse(response);
                 Elements items = document.select(".story");
@@ -136,15 +150,16 @@ public class FragmnetContent extends Fragment {
                         minutepost = Integer.parseInt(mangtime[1]);
                         timeStamp = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
                         arrtimenow = timeStamp.split(":");
-                         hournow = Integer.parseInt(arrtimenow[0]);
-                         minutenow = Integer.parseInt(arrtimenow[1]);
-                         if(hournow > hourpost) {
-                             timeago = (hournow - hourpost) + " giờ trước";
-                         }else{
-                             timeago = (minutenow - minutepost) + " phút trước";
-                         }
-                         Log.d("time",hournow + ":" + minutenow);
-                         arrayListPost.add(new Post(linkthumbail,linkpost,tittle,from,timeago));
+                        hournow = Integer.parseInt(arrtimenow[0]);
+                        minutenow = Integer.parseInt(arrtimenow[1]);
+                        if(hournow > hourpost) {
+                            timeago = (hournow - hourpost) + " giờ trước";
+                        }else{
+                            timeago = (minutenow - minutepost) + " phút trước";
+                        }
+                        Log.d("time",hournow + ":" + minutenow);
+                        arrayListPost.add(new Post(linkthumbail,linkpost,tittle,from,timeago));
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
 
                 }
@@ -160,6 +175,7 @@ public class FragmnetContent extends Fragment {
         );
         requestQueue.add(stringRequest);
     }
+
     // bắt sự kiện swipe
     public void sukienswipe()
     {
@@ -167,8 +183,8 @@ public class FragmnetContent extends Fragment {
             @Override
             public void onRefresh() {
                 MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(),R.raw.cuoi);
-                mess();
                 mediaPlayer.start();
+                mess();
                 swl.setRefreshing(false);
                 Toast.makeText(getActivity(), "Đã cập nhật ! ahihi ^^", Toast.LENGTH_SHORT).show();
             }
@@ -181,77 +197,5 @@ public class FragmnetContent extends Fragment {
         mediaPlayer.start();
         swl.setRefreshing(false);
         Toast.makeText(getActivity(), "Đã cập nhật ! ahihi ^^", Toast.LENGTH_SHORT).show();
-    }
-    public class loadtin extends AsyncTask<String,Integer,Void>
-    {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Log.d("process","1");
-        }
-
-        @Override
-        protected Void doInBackground(String... strings) {
-            Log.d("process","2");
-            arrayListPost.clear();
-            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-            StringRequest stringRequest = new StringRequest(Request.Method.GET,strings[0], new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Log.d("html",response.toString());
-                    Document document = Jsoup.parse(response);
-                    Elements items = document.select(".story");
-                    String linkthumbail,tittle,timeago,from,linkpost,timeStamp;
-                    String[] arr,arrtimenow;
-                    int hourpost,hournow,minutepost,minutenow;
-                    for(Element i:items)
-                    {
-                        linkthumbail = i.select(".story__thumb a img").attr("src");
-                        tittle = i.select(".story__heading a").text();
-                        timeago = i.select(".story__meta .time").attr("datetime");
-                        from = i.select(".story__meta .source").text();
-                        linkpost = "https://baomoi.com" + i.select(".story__heading a").attr("href");
-                        if(!(linkthumbail.length() == 0 || tittle.length() == 0 || timeago.length() == 0 || linkpost.length() ==0))
-                        {
-                            String[] time = timeago.split("T");
-                            String daypost = time[0].replace('-', '/');
-                            String timepost = time[1].substring(0,5);
-                            String[] mangtime = timepost.split(":");
-                            hourpost = Integer.parseInt(mangtime[0]);
-                            minutepost = Integer.parseInt(mangtime[1]);
-                            timeStamp = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
-                            arrtimenow = timeStamp.split(":");
-                            hournow = Integer.parseInt(arrtimenow[0]);
-                            minutenow = Integer.parseInt(arrtimenow[1]);
-                            if(hournow > hourpost) {
-                                timeago = (hournow - hourpost) + " giờ trước";
-                            }else{
-                                timeago = (minutenow - minutepost) + " phút trước";
-                            }
-                            Log.d("time",hournow + ":" + minutenow);
-                            arrayListPost.add(new Post(linkthumbail,linkpost,tittle,from,timeago));
-                            progressBar.setVisibility(View.INVISIBLE);
-                        }
-
-                    }
-                    adapter.notifyDataSetChanged();
-                }
-            },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-            );
-            requestQueue.add(stringRequest);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            Log.d("process","3");
-        }
     }
 }

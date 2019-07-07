@@ -8,11 +8,13 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +29,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -64,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbarmanhinhchinh);
         navigationView = (NavigationView) findViewById(R.id.navigationviewmanhinhchinh);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
+        // ghi đè icon option menu
+        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
+                R.drawable.ic_more_vert_black_24dp);
+        toolbar.setOverflowIcon(drawable);
     }
     // set up toolbar
     private void Actionbar() {
@@ -212,8 +219,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 if(edtacc.getText().toString().equals("son") && edtpass.getText().toString().equals("123")){
-                                    Intent intent = new Intent(MainActivity.this, Detailpost.class);
-                                    intent.putExtra("link","https://checkerviet.com/");
+                                    Intent intent = new Intent(MainActivity.this, Mrcong.class);
                                     startActivity(intent);
                                     dialog.dismiss();
                                 }else{

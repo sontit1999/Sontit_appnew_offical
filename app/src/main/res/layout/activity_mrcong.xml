@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar
+        android:elevation="4dp"
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbarMrcong"
+        app:title="Gái xinh"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:weightSum="4"
+        android:background="@color/_while"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_weight="4"
+            android:id="@+id/framelayoutMrcong"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>
