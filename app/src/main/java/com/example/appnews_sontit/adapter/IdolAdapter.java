@@ -1,6 +1,7 @@
 package com.example.appnews_sontit.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,8 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appnews_sontit.Detailpost;
+import com.example.appnews_sontit.GallerryIdol;
 import com.example.appnews_sontit.R;
 import com.example.appnews_sontit.unity.Idol;
+import com.example.appnews_sontit.unity.Photo;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -34,7 +38,7 @@ public class IdolAdapter extends RecyclerView.Adapter<IdolAdapter.Holderview>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Holderview holderview, int i) {
+    public void onBindViewHolder(@NonNull final Holderview holderview, final int i) {
         final Idol idol = arrayList.get(i);
         if(!idol.getLinkidol().trim().isEmpty() && !idol.getLinkthumbail().trim().isEmpty() && !idol.getNameidol().trim().isEmpty()){
             Picasso.get().load(idol.getLinkthumbail()).into(holderview.imgidol);
@@ -43,7 +47,10 @@ public class IdolAdapter extends RecyclerView.Adapter<IdolAdapter.Holderview>{
         holderview.containeridol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, idol.getLinkidol(), Toast.LENGTH_SHORT).show();
+                Idol idol1 = arrayList.get(i);
+                Intent intent = new Intent(context, GallerryIdol.class);
+                intent.putExtra("linkidol",idol.getLinkidol());
+                context.startActivity(intent);
             }
         });
     }

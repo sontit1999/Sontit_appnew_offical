@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Mrcong"></activity>
+        <activity android:name=".GallerryIdol"></activity>
+        <activity android:name=".Mrcong" />
         <activity android:name=".Savepost" />
         <activity android:name=".Seenpost" />
         <activity android:name=".Detailpost" />
