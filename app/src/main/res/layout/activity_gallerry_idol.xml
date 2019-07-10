@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:orientation="vertical"
+    android:weightSum="4"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,19 +9,26 @@
     android:layout_height="match_parent"
     tools:context=".GallerryIdol">
     <FrameLayout
+        android:layout_weight="3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <fr.rolandl.carousel.Carousel
-            android:layout_centerInParent="true"
-            android:id="@+id/carousel"
-            android:animationDuration="200"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></fr.rolandl.carousel.Carousel>
+        android:layout_height="0dp">
         <ImageView
             android:id="@+id/mainimage"
-            android:src="@mipmap/gaixinh"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/imageviewback"
+            android:src="@drawable/backidol"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
     </FrameLayout>
 
-</RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerviewgalleryidol"
+            android:background="#201C1C"
+            android:layout_weight="1"
+            android:layout_below="@id/mainimage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

@@ -34,4 +34,5 @@ dependencies {
     implementation 'com.mikhaellopez:circularimageview:3.2.0'
     implementation 'org.jsoup:jsoup:1.12.1'
     implementation 'fr.rolandl:carousel:1.0.1@aar'
+    implementation 'com.commit451:PhotoView:1.2.4'
 }
