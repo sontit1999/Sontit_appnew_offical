@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ import java.util.Calendar;
 import java.util.Random;
 
 public class FragmnetContent extends Fragment {
+    ImageView imgtop;
     ProgressBar progressBar;
     SwipeRefreshLayout swl;
     RecyclerView recyclerView;
@@ -73,13 +75,22 @@ public class FragmnetContent extends Fragment {
                 if(!recyclerView.canScrollVertically(1))
                 {
                     Toast.makeText(getActivity(), "Hết rồi còn đâu mà vuốt cái gì haha", Toast.LENGTH_SHORT).show();
+                    imgtop.setVisibility(View.VISIBLE);
                 }
             }
         });
-
+        imgtop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.scrollToPosition(0);
+                imgtop.setVisibility(View.INVISIBLE);
+            }
+        });
         return view;
     }
     public void anhxa(View view){
+        imgtop = (ImageView) view.findViewById(R.id.imagetop);
+        imgtop.setVisibility(View.INVISIBLE);
         progressBar = view.findViewById(R.id.progress);
         swl = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshlayout);
         // random màu swipe to refresh

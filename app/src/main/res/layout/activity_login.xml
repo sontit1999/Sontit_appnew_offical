@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/background" />
+    <ScrollView
+        android:paddingHorizontal="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:paddingHorizontal="30dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/custom_shadow"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/butcherman"
+                android:text="Sơn Tít"
+                android:textColor="#ABFFFFFF"
+                android:textSize="40sp"
+                />
+            <EditText
+                android:id="@+id/edittextusername"
+                android:hint="Username..."
+                android:textSize="14sp"
+                android:textColorHint="#63FFFFFF"
+                android:textColor="#B5FFFFFF"
+                android:background="@drawable/custom_edittext"
+                android:padding="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+            <EditText
+                android:textSize="14sp"
+                android:id="@+id/edittextpassword"
+                android:inputType="textPassword"
+                android:textColorHint="#63FFFFFF"
+                android:layout_height="40dp"
+                android:textColor="#B5FFFFFF"
+                android:background="@drawable/custom_edittext"
+                android:padding="10dp"
+                android:hint="Passwword..."
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                />
+            <Button
+                android:textColor="@color/_while"
+                android:layout_marginTop="30dp"
+                android:id="@+id/buttonlogin"
+                android:background="@drawable/custom_btnlogin"
+                android:layout_gravity="center_horizontal"
+                android:text="Log in"
+                android:layout_width="120dp"
+                android:layout_height="40dp" />
+            <TextView
+                android:id="@+id/textviewregisger"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal"
+                android:text="No account.Register now "
+                android:textColor="#8FFFFFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnFacebook"
+                android:layout_weight="1"
+                android:text="Facebook"
+                android:textColor="#D8D1D1"
+                android:background="@drawable/custom_btnlogin"
+                android:textAllCaps="true"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+        </LinearLayout>
+    </ScrollView>
+    <ProgressBar
+        android:layout_marginTop="170dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/progressbar"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+</FrameLayout>

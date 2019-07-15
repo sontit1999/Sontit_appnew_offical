@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/bgregister" />
+    <ScrollView
+        android:paddingHorizontal="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:paddingHorizontal="30dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/custom_shadow"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/butcherman"
+                android:text="Đăng Kí"
+                android:textColor="#ABFFFFFF"
+                android:textSize="40sp"
+                />
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <EditText
+                android:id="@+id/edittextusername"
+                android:hint="Username..."
+                android:textSize="14sp"
+                android:textColorHint="#63FFFFFF"
+                android:textColor="#B5FFFFFF"
+                android:background="@drawable/custom_edittext"
+                android:padding="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+            <EditText
+                android:textSize="14sp"
+                android:id="@+id/edittextpassword1"
+                android:inputType="textPassword"
+                android:textColorHint="#63FFFFFF"
+                android:layout_height="40dp"
+                android:textColor="#B5FFFFFF"
+                android:background="@drawable/custom_edittext"
+                android:padding="10dp"
+                android:hint="Passwword..."
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                />
+            <EditText
+                android:textSize="14sp"
+                android:id="@+id/edittextagainpassword1"
+                android:inputType="textPassword"
+                android:textColorHint="#63FFFFFF"
+                android:layout_height="40dp"
+                android:textColor="#B5FFFFFF"
+                android:background="@drawable/custom_edittext"
+                android:padding="10dp"
+                android:hint="Re-passwword..."
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                />
+            <Button
+                android:textColor="@color/_while"
+                android:layout_marginTop="30dp"
+                android:id="@+id/buttonregister"
+                android:background="@drawable/custom_btnlogin"
+                android:layout_gravity="center_horizontal"
+                android:text="Register"
+                android:layout_width="120dp"
+                android:layout_height="35dp" />
+            <TextView
+                android:id="@+id/textviewhaveaccount"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal"
+                android:text="If you have account.Login now"
+                android:textColor="#8FFFFFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"/>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
