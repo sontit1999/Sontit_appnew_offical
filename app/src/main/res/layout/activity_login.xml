@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
-            android:paddingHorizontal="30dp"
+            android:padding="30dp"
             android:layout_marginTop="50dp"
             android:background="@drawable/custom_shadow"
             android:orientation="vertical"
@@ -73,17 +73,6 @@
                 android:textColor="#8FFFFFFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <Button
-                android:layout_marginTop="15dp"
-                android:id="@+id/btnFacebook"
-                android:layout_weight="1"
-                android:text="Facebook"
-                android:textColor="#D8D1D1"
-                android:background="@drawable/custom_btnlogin"
-                android:textAllCaps="true"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp" />
         </LinearLayout>
     </ScrollView>
     <ProgressBar

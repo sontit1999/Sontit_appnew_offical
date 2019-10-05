@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     String urllogin = "https://sontithaui.000webhostapp.com/login.php" ;
     EditText edtUsername,edtPassword;
     TextView txtregister;
-    Button btnDangnhap,btnfb;
+    Button btnDangnhap;
     ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,16 +56,9 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btnfb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "Login fb", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void anhxa() {
-        btnfb  = (Button) findViewById(R.id.btnFacebook);
         txtregister = (TextView) findViewById(R.id.textviewregisger);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         progressBar.setVisibility(View.INVISIBLE);
