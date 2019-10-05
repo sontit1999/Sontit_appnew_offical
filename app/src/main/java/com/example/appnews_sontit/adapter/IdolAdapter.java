@@ -10,13 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.appnews_sontit.Detailpost;
 import com.example.appnews_sontit.GallerryIdol;
 import com.example.appnews_sontit.R;
+import com.example.appnews_sontit.callback.GirlCallback;
 import com.example.appnews_sontit.unity.Idol;
-import com.example.appnews_sontit.unity.Photo;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,10 +22,12 @@ import java.util.ArrayList;
 public class IdolAdapter extends RecyclerView.Adapter<IdolAdapter.Holderview>{
     Context context;
     ArrayList<Idol> arrayList;
+    GirlCallback listener;
 
     public IdolAdapter(Context context, ArrayList<Idol> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
+        listener = (GirlCallback) context;
     }
 
     @NonNull
@@ -47,10 +47,10 @@ public class IdolAdapter extends RecyclerView.Adapter<IdolAdapter.Holderview>{
         holderview.containeridol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Idol idol1 = arrayList.get(i);
                 Intent intent = new Intent(context, GallerryIdol.class);
-                intent.putExtra("linkidol",idol.getLinkidol());
-                context.startActivity(intent);
+//                intent.putExtra("linkidol",idol.getLinkidol());
+//                context.startActivity(intent);
+                  listener.onGirlclick(idol.getLinkidol());
             }
         });
     }

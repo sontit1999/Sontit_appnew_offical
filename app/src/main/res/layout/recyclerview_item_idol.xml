@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<LinearLayout android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="10dp"
     android:id="@+id/containerIdol"
-    android:layout_width="match_parent"
+android:background="@color/_while"
+xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.v7.widget.CardView android:layout_width="match_parent"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="4dp"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <android.support.v7.widget.CardView android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        android:elevation="5dp"
-        xmlns:android="http://schemas.android.com/apk/res/android">
-        <LinearLayout
-            android:orientation="vertical"
-            xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:scaleType="fitXY"
-                android:src="@mipmap/dj"
-                android:id="@+id/imageviewidol"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
-            <TextView
-                android:padding="10dp"
-                android:gravity=""
-                android:textColor="#0A0A0A"
-                android:textSize="20sp"
-                android:text="Linh pari"
-                android:id="@+id/textviewNameidol"
-                android:layout_weight="2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+    app:cardCornerRadius="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:background="@color/_while"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:scaleType="fitXY"
+            android:src="@mipmap/dj"
+            android:id="@+id/imageviewidol"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+        <TextView
+            android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/textviewNameidol"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_below="@id/imageviewidol"
+            android:textSize="20sp"
+            android:text="Tiêu đề"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
 </LinearLayout>
 

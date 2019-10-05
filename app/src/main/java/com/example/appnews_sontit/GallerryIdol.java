@@ -136,7 +136,7 @@ public class GallerryIdol extends AppCompatActivity {
     public void setuprecyclerview(){
 
         recyclerView.setHasFixedSize(true);
-        adapter = new ImageAdapter(GallerryIdol.this,photos);
+        adapter = new ImageAdapter(this,photos);
         // tao layoutmanager
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);

@@ -12,17 +12,22 @@ import android.widget.LinearLayout;
 
 import com.example.appnews_sontit.GallerryIdol;
 import com.example.appnews_sontit.R;
+import com.example.appnews_sontit.callback.GirlCallback;
+import com.example.appnews_sontit.fragment.Fragment_Idol;
 import com.example.appnews_sontit.unity.Photo;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.Viewholder>{
-    GallerryIdol context;
+    Context context;
     List<Photo> arraylist;
-    public ImageAdapter(GallerryIdol context, List<Photo> arraylist) {
-        this.context = context;
+    GirlCallback listener;
+    public ImageAdapter(Context context,List<Photo> arraylist) {
         this.arraylist = arraylist;
+        this.context = context;
+        listener = (GirlCallback) context;
+
     }
 
     @NonNull
@@ -42,8 +47,7 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.Viewholder>
             viewholder.contain.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Picasso.get().load(photo.getImage()).into(context.mainimage);
-                    context.mainimage.setVisibility(View.VISIBLE);
+                    listener.onImageGirlClick(photo);
                 }
             });
 

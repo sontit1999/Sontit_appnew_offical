@@ -76,10 +76,10 @@ public class Fragment_girl extends Fragment {
 
         recyclerView.setHasFixedSize(true);
 
-        // add divider item
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
-        recyclerView.addItemDecoration(itemDecorator);
+//        // add divider item
+//        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+//        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
+//        recyclerView.addItemDecoration(itemDecorator);
 
         adapter = new IdolAdapter(getContext(),arrayList);
 
@@ -155,7 +155,7 @@ public class Fragment_girl extends Fragment {
             public void onClick(View v) {
                 int pageuserenter = Integer.parseInt(edtpage.getText().toString());
                 if(pageuserenter>650 || pageuserenter <=0){
-                        Toast.makeText(getActivity(), "Trang hợp lệ từ 0 đến 650 hihi ^^", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Trang hợp lệ từ 1 đến 650 hihi ^^", Toast.LENGTH_SHORT).show();
                         edtpage.setText(PAGE+"");
                 }else{
                     PAGE = pageuserenter;
@@ -164,5 +164,11 @@ public class Fragment_girl extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("test","Destroy frag girl");
     }
 }
