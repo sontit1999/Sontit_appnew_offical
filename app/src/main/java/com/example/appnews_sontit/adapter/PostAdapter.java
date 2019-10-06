@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +33,9 @@ import com.example.appnews_sontit.unity.Database;
 import com.example.appnews_sontit.unity.Post;
 import com.squareup.picasso.Picasso;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.Myviewholder> {
@@ -73,6 +79,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.Myviewholder> 
                     break;
         }
         Picasso.get().load(post.getLinkthumbail()).into(myviewholder.img);
+
         myviewholder.txttittle.setText(post.getTittle());
         myviewholder.txttimeandfrom.setText(post.getFromnew() + " - " + post.getTimepost());
         // bắt sự kiện click vào item thì add post vào database
@@ -117,4 +124,5 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.Myviewholder> 
             containerpost = (LinearLayout) itemView.findViewById(R.id.containerpost);
         }
     }
+
 }

@@ -39,7 +39,7 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.Viewholder>
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder viewholder, int i) {
-            viewholder.contain.setAnimation(AnimationUtils.loadAnimation(context, R.anim.animation_itempost));
+//            viewholder.contain.setAnimation(AnimationUtils.loadAnimation(context, R.anim.animation_itempost));
             final Photo photo = arraylist.get(i);
             if(photo!=null){
                 Picasso.get().load(photo.getImage()).into(viewholder.img);
@@ -47,7 +47,7 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.Viewholder>
             viewholder.contain.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onImageGirlClick(photo);
+                    listener.onImageGirlClick(photo,arraylist);
                 }
             });
 
