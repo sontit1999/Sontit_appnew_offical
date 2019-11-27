@@ -1,23 +1,21 @@
 package com.example.appnews_sontit.fragment;
 
-import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -30,12 +28,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.appnews_sontit.MainActivity;
 import com.example.appnews_sontit.unity.Config;
 import com.example.appnews_sontit.R;
 import com.example.appnews_sontit.adapter.PostAdapter;
-import com.example.appnews_sontit.unity.Database;
-import com.example.appnews_sontit.unity.EndlessRecyclerViewScrollListener;
 import com.example.appnews_sontit.unity.Post;
 import com.example.appnews_sontit.unity.Server;
 
@@ -44,11 +39,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
+
+import me.yuqirong.cardswipelayout.CardItemTouchHelperCallback;
+import me.yuqirong.cardswipelayout.CardLayoutManager;
+import me.yuqirong.cardswipelayout.OnSwipeListener;
 
 public class FragmnetContent extends Fragment {
     ImageView imgtop;
@@ -111,21 +109,31 @@ public class FragmnetContent extends Fragment {
         recyclerView.addItemDecoration(itemDecorator);
 
         adapter = new PostAdapter(getActivity(),R.layout.item_post,1,arrayListPost);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        if(Config.orien == 0){
-            recyclerView.setLayoutManager(linearLayoutManager);
-        }else{
-             recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,1));
-        }
         recyclerView.setAdapter(adapter);
 
-        recyclerView.setOnClickListener(new View.OnClickListener() {
+
+        final CardItemTouchHelperCallback cardCallback = new CardItemTouchHelperCallback(recyclerView.getAdapter(),arrayListPost);
+        ItemTouchHelper itemTouchHelper =  new ItemTouchHelper(cardCallback);
+        CardLayoutManager cardLayoutManager = new CardLayoutManager(recyclerView,itemTouchHelper);
+        recyclerView.setLayoutManager(cardLayoutManager);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+        cardCallback.setOnSwipedListener(new OnSwipeListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "á á", Toast.LENGTH_SHORT).show();
+            public void onSwiping(RecyclerView.ViewHolder viewHolder, float v, int i) {
+                Log.d("test","on swiping");
+
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, Object o, int i) {
+                Log.d("test","on swiped");
+            }
+
+            @Override
+            public void onSwipedClear() {
+                 Log.d("test","on swipe clear");
             }
         });
-
     }
     // lấy data
     public void mess()

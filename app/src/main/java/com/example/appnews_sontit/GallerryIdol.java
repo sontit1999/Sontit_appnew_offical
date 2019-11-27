@@ -1,18 +1,16 @@
 package com.example.appnews_sontit;
 
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -23,14 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.appnews_sontit.adapter.AdapterCarousel;
 import com.example.appnews_sontit.adapter.ImageAdapter;
-import com.example.appnews_sontit.adapter.PostAdapter;
-import com.example.appnews_sontit.unity.Config;
-import com.example.appnews_sontit.unity.EndlessRecyclerViewScrollListener;
-import com.example.appnews_sontit.unity.Idol;
 import com.example.appnews_sontit.unity.Photo;
-import com.example.appnews_sontit.unity.Server;
 import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
@@ -40,11 +32,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import fr.rolandl.carousel.Carousel;
-import fr.rolandl.carousel.CarouselAdapter;
-import fr.rolandl.carousel.CarouselBaseAdapter;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class GallerryIdol extends AppCompatActivity {

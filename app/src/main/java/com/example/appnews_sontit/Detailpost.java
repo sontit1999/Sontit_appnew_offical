@@ -2,14 +2,13 @@ package com.example.appnews_sontit;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.core.view.GravityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.widget.Toolbar;
-import android.text.TextPaint;
-import android.util.Log;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,25 +16,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.appnews_sontit.adapter.PostAdapter;
-import com.example.appnews_sontit.fragment.FragmnetContent;
-import com.example.appnews_sontit.unity.Post;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class Detailpost extends AppCompatActivity {
     Toolbar toolbar;

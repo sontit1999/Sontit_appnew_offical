@@ -3,12 +3,13 @@ package com.example.appnews_sontit.fragment;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,9 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.yuqirong.cardswipelayout.CardItemTouchHelperCallback;
+import me.yuqirong.cardswipelayout.CardLayoutManager;
+import me.yuqirong.cardswipelayout.OnSwipeListener;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 @SuppressLint("ValidFragment")
@@ -72,22 +76,32 @@ public class Fragment_Idol extends Fragment {
         recyclerView.setHasFixedSize(true);
         adapter = new ImageAdapter(getContext(),photos);
         // tao layoutmanager
-        RecyclerView.LayoutManager linearLayoutManager = new GridLayoutManager(getContext(),2,LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        //RecyclerView.LayoutManager linearLayoutManager = new GridLayoutManager(getContext(),2,LinearLayoutManager.VERTICAL,false);
+       // recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        final CardItemTouchHelperCallback cardCallback = new CardItemTouchHelperCallback(recyclerView.getAdapter(),photos);
+        ItemTouchHelper itemTouchHelper =  new ItemTouchHelper(cardCallback);
+        CardLayoutManager cardLayoutManager = new CardLayoutManager(recyclerView,itemTouchHelper);
+        recyclerView.setLayoutManager(cardLayoutManager);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+        cardCallback.setOnSwipedListener(new OnSwipeListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                LinearLayoutManager layoutManager=LinearLayoutManager.class.cast(recyclerView.getLayoutManager());
-                int totalItemCount = layoutManager.getItemCount();
-                int lastVisible = layoutManager.findLastVisibleItemPosition();
+            public void onSwiping(RecyclerView.ViewHolder viewHolder, float v, int i) {
+                Log.d("test","on swiping");
+            }
 
-                boolean endHasBeenReached = lastVisible + 5 >= totalItemCount;
-                if (totalItemCount > 0 && endHasBeenReached) {
-                    getdata(link);
-                }
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, Object o, int i) {
+                Log.d("test","on swiped");
+            }
+
+            @Override
+            public void onSwipedClear() {
+                Log.d("test","on swipe clear");
+                getdata(link);
             }
         });
+
     }
     public void getdata(String link){
         if(PAGE<7){

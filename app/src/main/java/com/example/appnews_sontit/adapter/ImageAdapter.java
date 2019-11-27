@@ -1,19 +1,16 @@
 package com.example.appnews_sontit.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.example.appnews_sontit.GallerryIdol;
 import com.example.appnews_sontit.R;
 import com.example.appnews_sontit.callback.GirlCallback;
-import com.example.appnews_sontit.fragment.Fragment_Idol;
 import com.example.appnews_sontit.unity.Photo;
 import com.squareup.picasso.Picasso;
 
