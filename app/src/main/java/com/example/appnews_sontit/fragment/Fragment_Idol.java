@@ -87,17 +87,17 @@ public class Fragment_Idol extends Fragment {
         cardCallback.setOnSwipedListener(new OnSwipeListener() {
             @Override
             public void onSwiping(RecyclerView.ViewHolder viewHolder, float v, int i) {
-                Log.d("test","on swiping");
+
             }
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, Object o, int i) {
-                Log.d("test","on swiped");
+
             }
 
             @Override
             public void onSwipedClear() {
-                Log.d("test","on swipe clear");
+
                 getdata(link);
             }
         });
@@ -136,6 +136,8 @@ public class Fragment_Idol extends Fragment {
                     }
             );
             requestQueue.add(stringRequest);
+        }else{
+            Toast.makeText(getActivity(), "Hết ảnh rùi :v", Toast.LENGTH_SHORT).show();
         }
     }
     public void sukienclick(){

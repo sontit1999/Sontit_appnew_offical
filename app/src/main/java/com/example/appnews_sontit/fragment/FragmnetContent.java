@@ -109,31 +109,12 @@ public class FragmnetContent extends Fragment {
         recyclerView.addItemDecoration(itemDecorator);
 
         adapter = new PostAdapter(getActivity(),R.layout.item_post,1,arrayListPost);
+        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
 
 
-        final CardItemTouchHelperCallback cardCallback = new CardItemTouchHelperCallback(recyclerView.getAdapter(),arrayListPost);
-        ItemTouchHelper itemTouchHelper =  new ItemTouchHelper(cardCallback);
-        CardLayoutManager cardLayoutManager = new CardLayoutManager(recyclerView,itemTouchHelper);
-        recyclerView.setLayoutManager(cardLayoutManager);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
-        cardCallback.setOnSwipedListener(new OnSwipeListener() {
-            @Override
-            public void onSwiping(RecyclerView.ViewHolder viewHolder, float v, int i) {
-                Log.d("test","on swiping");
 
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, Object o, int i) {
-                Log.d("test","on swiped");
-            }
-
-            @Override
-            public void onSwipedClear() {
-                 Log.d("test","on swipe clear");
-            }
-        });
     }
     // lấy data
     public void mess()
